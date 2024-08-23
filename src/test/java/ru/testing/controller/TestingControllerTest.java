@@ -13,7 +13,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import ru.testing.dto.TestingDto;
 import ru.testing.service.TestingService;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @WebMvcTest(TestingController.class)
 class TestingControllerTest {
@@ -28,10 +29,10 @@ class TestingControllerTest {
     @Test
     void getResult() throws Exception {
         String input = "aaaaabcccc";
-        HashMap<Character, Integer> result = new HashMap<>();
+        Map<Character, Integer> result = new LinkedHashMap<>();
         result.put('a', 5);
-        result.put('b', 1);
         result.put('c', 4);
+        result.put('b', 1);
 
         TestingDto testingDto = TestingDto.builder()
                 .result(result)
