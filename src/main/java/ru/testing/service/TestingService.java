@@ -17,6 +17,19 @@ public class TestingService {
     public TestingDto getResult(String input) {
         char[] chars = input.toCharArray();
 
+        Map<Character, Integer> charsMap = getCharsMap(chars);
+
+        Map<Character, Integer> sortedMap = getSortedMap(charsMap);
+
+        TestingDto testingDto = TestingDto.builder()
+                .result(sortedMap)
+                .build();
+        log.info("get result by charsMap {} ", charsMap);
+        log.info("get result by sortedMap {} ", sortedMap);
+        return testingDto;
+    }
+
+    private Map<Character, Integer> getCharsMap(char[] chars) {
         Map<Character, Integer> charsMap = new LinkedHashMap<>();
         for (char aChar : chars) {
             if (charsMap.containsKey(aChar)) {
@@ -27,16 +40,11 @@ public class TestingService {
             }
 
         }
+        return charsMap;
+    }
 
-//        Map<Character, Integer> sortedMap = charsMap.entrySet()
-//                .stream()
-//                .sorted(Map.Entry.comparingByValue())
-//                .collect(Collectors.toMap(
-//                        Map.Entry::getKey,
-//                        Map.Entry::getValue,
-//                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
-
-        Map<Character, Integer> sortedMap = charsMap.entrySet()
+    private Map<Character, Integer> getSortedMap(Map<Character, Integer> charsMap) {
+        return charsMap.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue(
                         Comparator.reverseOrder()))
@@ -44,12 +52,5 @@ public class TestingService {
                         Map.Entry::getKey,
                         Map.Entry::getValue,
                         (oldValue, newValue) -> oldValue, LinkedHashMap::new));
-
-        TestingDto testingDto = TestingDto.builder()
-                .result(sortedMap)
-                .build();
-        log.info("get result by charsMap {} ", charsMap);
-        log.info("get result by sortedMap {} ", sortedMap);
-        return testingDto;
     }
 }

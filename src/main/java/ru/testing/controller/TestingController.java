@@ -11,11 +11,11 @@ import ru.testing.service.TestingService;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/testing")
 public class TestingController {
     private final TestingService testingService;
 
-    @GetMapping("/testing")
+    @GetMapping
     public ResponseEntity<TestingDto> getResult(
             @RequestParam("input") String input) {
 

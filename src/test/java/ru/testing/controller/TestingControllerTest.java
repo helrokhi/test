@@ -46,7 +46,7 @@ class TestingControllerTest {
         mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .get("/api/testing")
+                                .get("/testing")
                                 .param("input", input)
                 )
                 .andDo(MockMvcResultHandlers.print())
